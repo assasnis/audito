@@ -202,6 +202,14 @@ public function ramo_asignado($cod_asig){
       $resultado = $query->row();
       return $resultado;
     }
+  
+  public function transferir_tabla(){
+        $query = $this->db->query('INSERT INTO planificacion_historica (codigo_asignatura,rut_profesor,syllabus,fecha_syllabus) SELECT planificacion.codigo_asignatura, planificacion.rut_profesor, planificacion.syllabus, planificacion.fecha_syllabus FROM planificacion');
+    }
+
+    public function borrar_planificacion(){
+        $query = $this->db->query('DELETE FROM planificacion');   
+    }
     
 }
 
