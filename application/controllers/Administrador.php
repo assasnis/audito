@@ -362,7 +362,7 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 
       	$this->salida_datos_plantilla($output);
 
-		}
+			}
   		
   		public function salida_datos_plantilla($output= null){
 
@@ -370,6 +370,16 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 			$this->load->view('headers/header_administrador');
 			$this->load->view('administrador/plantillas.php',$output);
 		}
+		
+		public function termino_semestre(){
+  			$this->mod_usuarios->transferir_tabla();
+  			$this->mod_usuarios->borrar_planificacion();			
+  			
+		}
+		
+	
+		
+		
   
 		
 	}
