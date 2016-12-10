@@ -5,7 +5,7 @@
 <div class="container" id="formulario2">
   <div class="row">
     <h2 align="center"><span class="glyphicon glyphicon-book"></span> Planificaciones historicas por asignatura</h2> 
-
+    <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">Cerrar Semestre</button>        
     <table class="table">
      <tr>
        <td style="color:black; font-size:200%"colspan="2" align="center">Primer Año</td>
@@ -31,7 +31,11 @@
        <td style="color:black; font-size:150%"align="center">X</td>
      </tr>                  
      <tr>
+
+
       <?php 
+
+
       $query = $this->mod_usuarios->ramo_asignado("au-110"); 
       if($query == TRUE){ ?>
       <th><button  style="background-color:#2ED5EB;" onclick="location.href='<?php echo  base_url();?>index.php/administrador/hist_plani?cod_asig=au-110' " type="button" class="btn btn-default btn-xs btn-block ">Fundamentos</br></br>Contables</button></th>
@@ -445,6 +449,41 @@
 </div>
 </div>
       <script src="<?php echo base_url();?>js/bootstrap.min.js"></script>
+
+
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Desea cerrar el semestre?</h4>
+      </div>
+      <div class="modal-body">
+         <form id="passForm" method="post" action=<?php echo base_url().'index.php/administrador/termino_semestre';?> class="form-horizontal" action="none" >
+         <div class="form-group">           
+                  
+             <div class="form-group">
+                 <div class="col-md-3 col-md-offset-3">
+                     <button type="submit" class="btn btn-default">Si</button>
+                </div>
+                <div class="col-md-3">
+                     <button class="btn btn-default" data-dismiss="modal">No</button>
+                </div>
+             </div>
+            </div>
+            
+           </div>
+     </form>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+
 
 </body>
 
