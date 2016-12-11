@@ -19,7 +19,7 @@
                         <a href="<?php echo base_url();?>index.php/administrador/admin_asignatura"><i class="glyphicon glyphicon-paperclip"></i> Cursos</a>
                     </li>
                     <li class >
-                        <a href="<?php echo base_url();?>index.php/administrador/admin_planificacion"><i class="glyphicon glyphicon-time"></i> Planificaciones</a>
+                        <a href="<?php echo base_url();?>index.php/administrador/malla_actual"><i class="glyphicon glyphicon-time"></i> Planificaciones</a>
                     </li>
                     <li class>
                         <a href='<?php echo base_url();?>index.php/administrador/malla'><i class="glyphicon glyphicon-time"></i>Planificaciones historicas</a>
