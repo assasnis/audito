@@ -378,7 +378,8 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 		
 		public function termino_semestre(){
   			$this->mod_usuarios->transferir_tabla();
-  			$this->mod_usuarios->borrar_planificacion();			
+  			$this->mod_usuarios->borrar_planificacion();		
+  			redirect(base_url() .'index.php/administrador'); 		
   			
 		}
 		
