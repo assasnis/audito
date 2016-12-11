@@ -32,21 +32,31 @@
 
         <div id="page-wrapper">
 
-            <div class="container-fluid">
-                    <?php 
-                        foreach($css_files as $file): ?>
-                            <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
-                        <?php endforeach; ?>
-                        <?php foreach($js_files as $file): ?>
-                            <script src="<?php echo $file; ?>"></script>
-                        <?php endforeach; ?>
+            <?php
+                   
+                     $consulta = $this->mod_usuarios->consulta_nom();
+                     $consulta2= $this->mod_usuarios->consulta_ape();
+                     $aux = count($consulta);
+                      ?>
+                   
 
-                            
-                                <?php echo $output; ?>
-                
-                <!-- /.row -->
+                          <div class="form-group">
+                        <label for="nombre" class="control-label col-xs-4">Nombre profesor</label>
+                        <div class="col-xs-5">
+                            <select name = "plan" class="col-xs-12">  
+                        <?php $i=0; 
 
-            </div>
+                            for ($i=0; $i <$aux ; $i++) { ?>
+                                <option  value="<?php echo $consulta[$i].' '.$consulta2[$i] ?>" > <?php echo $consulta[$i].' '.$consulta2[$i] ?> </option>
+                           <?php }
+
+                        ?>  
+                             </select> 
+                            <span class="help-block"></span>
+                        </div>
+
+                          <button class="btn btn-primary col-xs-5 col-xs-offset-4"  type="submit" ><span class="glyphicon glyphicon-log-in"></span> Aceptar</button> 
+                    </div>
             <!-- /.container-fluid -->
 
         </div>
