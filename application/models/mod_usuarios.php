@@ -211,6 +211,60 @@ public function ramo_asignado($cod_asig){
         $query = $this->db->query('DELETE FROM planificacion');   
     }
     
+ function consulta_nom()
+  {
+    $query = $this->db->query("SELECT * FROM usuarios order by nombre_1");
+    if ($query)
+    {
+       
+          $aux=0;
+         
+
+            foreach ($query->result() as $profesor) {
+
+              $arreglo[$aux]=$profesor->nombre_1 ;
+             
+              $aux=$aux+1;
+                
+            }  
+
+            return $arreglo;       
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+
+  function consulta_ape()
+  {
+    $query = $this->db->query("SELECT * FROM usuarios order by nombre_1");
+    if ($query)
+    {
+       
+          $aux=0;
+         
+
+            foreach ($query->result() as $profesor) {
+
+              $arreglo[$aux]=$profesor->apellido_1 ;
+             
+              $aux=$aux+1;
+                
+            }  
+
+            return $arreglo;       
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+
+    
 }
+
 
 
