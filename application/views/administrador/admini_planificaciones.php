@@ -41,9 +41,23 @@
                    
 
                           <div class="form-group">
-                        <label for="nombre" class="control-label col-xs-4">Nombre profesor</label>
-                        <div class="col-xs-5">
-                            <select name = "plan" class="col-xs-12">  
+
+                          <div class="col-xs-12">
+                        <label for="nombre" class="control-label col-xs-2">Semestre</label>
+                             <select name="semestre" class="col-xs-2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                              </select>
+                        </div>
+
+                        <div class="col-xs-12">
+                        <label for="nombre" class="control-label col-xs-2">Año</label>
+                             <input type="Text" name="año" class="col-xs-2"></input>
+                        </div>
+                        
+                        <div class="col-xs-12">
+                            <label for="nombre" class="control-label col-xs-2">Nombre profesor</label>
+                            <select name = "profesor" class="col-xs-2">  
                         <?php $i=0; 
 
                             for ($i=0; $i <$aux ; $i++) { ?>
@@ -52,10 +66,15 @@
 
                         ?>  
                              </select> 
+
+
+                             
+                        
+
                             <span class="help-block"></span>
                         </div>
 
-                          <button class="btn btn-primary col-xs-5 col-xs-offset-4"  type="submit" ><span class="glyphicon glyphicon-log-in"></span> Aceptar</button> 
+                          <button class="btn btn-primary col-xs-2 col-xs-offset-2"  type="submit" ><span class="glyphicon glyphicon-log-in"></span> Aceptar</button> 
                     </div>
             <!-- /.container-fluid -->
 

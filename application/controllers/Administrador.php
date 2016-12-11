@@ -98,7 +98,7 @@
 
 		}
 		public function salida_datos_plani($output= null){
-			$this->load->view('head_noticias');
+			$this->load->view('head');
 			$this->load->view('headers/header_administrador');
 			$this->load->view('administrador/admini_planificaciones.php',$output);
 		}
