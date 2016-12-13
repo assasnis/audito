@@ -1,4 +1,4 @@
-  <?php
+   <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class mod_usuarios extends CI_Model{  
@@ -77,6 +77,26 @@ public function ramo_asignado($cod_asig){
            }
     
 }
+
+public function planificacion_histo($cod_asig,$rut){
+
+
+      $query = $this->db->where('CODIGO_ASIGNATURA',$cod_asig);
+      $query = $this->db->where('rut_profesor',$rut);
+      $query = $this->db->get('planificacion');
+            if($this->db->affected_rows()>0){
+                return TRUE;
+           }
+           else{
+                return FALSE;
+           }
+
+}
+
+
+
+
+
 //consulta para controlar error de primary key duplicada
         public function buscar_profesor($rut){
             $query = $this->db->where('rut',$rut);
@@ -283,6 +303,5 @@ public function ramo_asignado($cod_asig){
 
     
 }
-
 
 
