@@ -3,7 +3,7 @@
 
 <div class="container" id="formulario2">
   <div class="row">
-    <h2 align="center"><span class="glyphicon glyphicon-book"></span> Planificaciones </h2> 
+    <h2 align="center"><span class="glyphicon glyphicon-book"></span> Planificaciones Historicas </h2> 
            
     <table class="table">
      <tr>
