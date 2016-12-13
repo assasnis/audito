@@ -8,7 +8,7 @@
                         <a href="<?php echo base_url();?>index.php/profesor/cursos_profesor"><i class="fa fa-fw fa-bar-chart-o"></i> Planificaciones</a>
                     </li>
                     <li class>
-                        <a href="<?php echo base_url();?>index.php/profesor/planificaciones_historicas"><i class="glyphicon glyphicon-time"></i> Planificaciones históricas</a>
+                        <a href="<?php echo base_url();?>index.php/profesor/malla_historica"><i class="glyphicon glyphicon-time"></i> Planificaciones históricas</a>
                     </li>
                      <li class="">
                         <a href="<?php echo base_url();?>index.php/profesor/plantillas_pr"><i class="glyphicon glyphicon-plus"></i>Plantillas</a>
@@ -52,6 +52,4 @@
 </body>
 
 </html>
-
-
 
