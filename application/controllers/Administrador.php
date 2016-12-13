@@ -25,43 +25,49 @@
 			$this->load->view('administrador/noticias');
 		}
 		//ADMINISTRA A LOS PROFESORES
-		public function admin_profesor(){
+		public function admin_planificaciones_com(){
 
+			
 			$crud = new grocery_CRUD();
-
-			$crud->where('tipo','Profesor');
-
-			$crud->set_language('spanish');
-			$crud->set_subject('Profesor');
 			//$crud->set_theme('datatables');
-			$crud->set_table('usuarios');
+			$crud->set_table('planificacion');
+			$crud->set_language('spanish');
+			$crud->set_subject('Planificacion');
 
-			$crud->columns('rut','nombre_1','apellido_1','apellido_2','departamento','correo','estado');
+
+		
+			$crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
 			
-			$crud->display_as('nombre_1','Primer Nombre');
-			$crud->display_as('nombre_2','Segundo Nombre');
-			$crud->display_as('apellido_1','Apellido Paterno');
-			$crud->display_as('apellido_2','Apellido Materno');
-
-			//listados add
-			$crud->field_type('departamento','enum',array('Facultad de Cs. de la Salud','Facultad de Cs. de la Educación','Facultad de Cs. de la Ingeniería','Facultad de Cs. Agrarias y Forestales','Facultad de Cs. Religiosas y Filosóficas','Facultad de Medicina','Facultad de Ciencias Básicas','Facultad de Ciencias Sociales y Económicas','Instituto de Estudios Generales'));
-			$crud->field_type('estado','enum',array('Activo','Inactivo'));
-			$crud->field_type('tipo','enum',array('Profesor','Administrador'));
-			//avisos de norma
-
-			$crud->callback_add_field('rut',function () {
-				return '<input type="text" maxlength="50" value="" name="rut"> (Ej: 18.563.111-3 )';
-			});
-
-
-			$crud->unset_edit_fields('RUT');
+			$crud->display_as('codigo_asignatura','Asignatura');
+			$crud->display_as('rut_profesor','Profesor');
+			$crud->display_as('fecha_syllabus','Fecha de actualizacion');
+			$crud->set_field_upload('syllabus','assets/uploads/files');
 			
-			
+			//relaciones con profes
+			$crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2} ');
+
+			//relaciones con la asignatura
+			$crud->set_relation('codigo_asignatura','asignatura','nombre');
+
+			//restricciones
+			$crud->unset_add();
+			//$crud->unset_edit();
+
+			$crud->unset_add_fields('syllabus','fecha_syllabus');
 			$output = $crud->render();
 
-			$this->salida_datos($output);
+			$this->salida_datos_planificaciones_com($output);
+			
 
 		}
+
+		public function salida_datos_planificaciones_com($output= null){
+			$this->load->view('head');
+			$this->load->view('headers/header_administrador');
+			$this->load->view('administrador/planificaciones_globales.php',$output);
+		}
+
+
 		//ADMINISTRA LAS PLANIFICACIONES Y ASIGNA LOS PROFESORES A LOS CURSOS
 		public function admin_planificacion(){//se necesita programar a mano el agregado de planificacion....
 			$cod_asig = $_GET['cod_asig'];
@@ -414,7 +420,7 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
       $crud->unset_add();
       $crud->unset_delete();
       $crud->unset_read();
-      //$crud->unset_edit();
+      $crud->unset_edit();
 
       $output = $crud->render();
 

@@ -39,7 +39,7 @@ class Profesor extends CI_Controller {
        $crud->set_field_upload('syllabus','assets/uploads/files');
        
         //relaciones con profes
-      $crud->set_relation('rut_profesor','usuarios','rut');
+      $crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2} ');
 
       //relaciones con la asignatura
       $crud->set_relation('codigo_asignatura','asignatura','nombre');
@@ -47,7 +47,7 @@ class Profesor extends CI_Controller {
       //restricciones
       $crud->unset_add();
       $crud->unset_delete();
-      $crud->edit_fields('fecha_syllabus','syllabus');
+      $crud->edit_fields('syllabus');
 
             
       $output = $crud->render();
@@ -64,16 +64,18 @@ class Profesor extends CI_Controller {
         $crud->set_language('spanish');
         $crud->set_subject('Planificacion');
        // $crud->set_theme('datatables');
-        $crud->set_table('planificacion');
+        $crud->set_table('planificacion_historica');
       
       
       //condiciones
         $crud->display_as('codigo_asignatura','Asignatura');
+        $crud->display_as('rut_profesor','Profesor');
         $crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
 
       $crud->set_field_upload('syllabus','assets/uploads/files');
         //relaciones con la asignatura
       $crud->set_relation('codigo_asignatura','asignatura','nombre');
+      $crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2} ');
 
       //restricciones
        $crud->unset_add();

@@ -5,7 +5,7 @@
                         <a href="<?php echo base_url();?>index.php/administrador"><i class="fa fa-fw fa-file"></i> Noticias</a>
                     </li>
                     <li class ="" >
-                        <a href="<?php echo base_url();?>index.php/administrador/admin_profesor"><i class="glyphicon glyphicon-th-list"></i> Profesores</a>
+                        <a href="<?php echo base_url();?>index.php/administrador/admin_planificaciones_com"><i class="glyphicon glyphicon-th-list"></i> Planificaciones globales</a>
                     </li>
                     <li class="" >
                         <a href="<?php echo base_url();?>index.php/administrador/admin_usuarios"><i class="glyphicon glyphicon-user"></i> Usuarios</a>
