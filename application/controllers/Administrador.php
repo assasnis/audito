@@ -430,7 +430,23 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 			$this->load->view('headers/header_administrador');
 			$this->load->view('administrador/editar_planificaciones.php',$output);
 		}
+
+
+
+		public function agregar_planificacion(){
+			$array=array('codigo_asignatura' => $_POST['ramo'],
+				'rut_profesor'=> $_POST['profesor'],
+				'fecha_syllabus'=>$_POST['fecha'],
+				'semestre'=>$_POST['semestre']);
+
+			$this->mod_usuarios->agregar_planificacion($array);
+
+			redirect(base_url() .'index.php/administrador/malla_actual'); 		
+  			
+  			
+		}
 	
+
   
 		
 	}

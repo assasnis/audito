@@ -213,7 +213,7 @@ public function ramo_asignado($cod_asig){
     
  function consulta_nom()
   {
-    $query = $this->db->query("SELECT * FROM usuarios order by nombre_1");
+    $query = $this->db->query("SELECT nombre_1 FROM usuarios order by nombre_1");
     if ($query)
     {
        
@@ -239,21 +239,15 @@ public function ramo_asignado($cod_asig){
 
   function consulta_ape()
   {
-    $query = $this->db->query("SELECT * FROM usuarios order by nombre_1");
+    $query = $this->db->query("SELECT apellido_1 FROM usuarios order by nombre_1");
     if ($query)
-    {
-       
-          $aux=0;
-         
+    {       
+          $aux=0;         
 
             foreach ($query->result() as $profesor) {
-
-              $arreglo[$aux]=$profesor->apellido_1 ;
-             
-              $aux=$aux+1;
-                
+              $arreglo[$aux]=$profesor->apellido_1 ;             
+              $aux=$aux+1;                
             }  
-
             return $arreglo;       
     }
     else
@@ -262,6 +256,30 @@ public function ramo_asignado($cod_asig){
     }
 
   }
+
+   function consulta_rut()
+  {
+    $query = $this->db->query("SELECT rut FROM usuarios order by nombre_1");
+    if ($query)
+    {       
+          $aux=0;         
+
+            foreach ($query->result() as $profesor) {
+              $arreglo[$aux]=$profesor->rut ;             
+              $aux=$aux+1;                
+            }  
+            return $arreglo;       
+    }
+    else
+    {
+      return false;
+    }
+
+  }
+
+  public function agregar_planificacion($array){
+       $this->db->insert('planificacion',$array);
+    }
 
     
 }
