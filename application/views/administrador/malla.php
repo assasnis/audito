@@ -4,7 +4,7 @@
 
 <div class="container" id="formulario2">
   <div class="row">
-    <h2 align="center"><span class="glyphicon glyphicon-book"></span> Planificaciones historicas por asignatura</h2> 
+    <h2 align="center"><span class="glyphicon glyphicon-book"></span> Planificaciones históricas por asignatura</h2> 
     
     <table class="table">
      <tr>

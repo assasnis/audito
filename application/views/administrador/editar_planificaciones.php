@@ -16,6 +16,9 @@
                     <li class="active" >
                         <a href="<?php echo base_url();?>index.php/administrador/malla_actual"><i class="glyphicon glyphicon-time"></i> Planificaciones</a>
                     </li>
+                    <li class="" >
+                        <a href="<?php echo base_url();?>index.php/administrador/malla_profesores"><i class="glyphicon glyphicon-time"></i> Profesores por Asignatura</a>
+                    </li>
                     <li class>
                         <a href='<?php echo base_url();?>index.php/administrador/malla'><i class="glyphicon glyphicon-time"></i>Planificaciones historicas</a>
                     </li>
