@@ -6,7 +6,7 @@
 			parent:: __construct();
 			session_start();
 			$this->load->helper('url');
-    		$this->load->model('mod_usuarios');
+    		$this->load->model('Mod_usuarios');
     		$this->load->library('grocery_CRUD');
     		error_reporting(E_ERROR | E_PARSE);
 		}
@@ -33,7 +33,6 @@
 			$crud->set_table('planificacion');
 			$crud->set_language('spanish');
 			$crud->set_subject('Planificacion');
-
 
 		
 			$crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
@@ -70,39 +69,30 @@
 
 		//ADMINISTRA LAS PLANIFICACIONES Y ASIGNA LOS PROFESORES A LOS CURSOS
 		public function admin_planificacion(){//se necesita programar a mano el agregado de planificacion....
-			$cod_asig = $_GET['cod_asig'];
-			$crud = new grocery_CRUD();
-			//$crud->set_theme('datatables');
-			$crud->set_table('planificacion');
-			$crud->set_language('spanish');
-			$crud->set_subject('Planificacion');
+			$cod=$_GET['cod_asig'];
+			echo $cod;
+			$consulta=$this->Mod_usuarios->revisar_asignacion($cod);
+			 foreach ($consulta->result() as $atributo) {
+         		 $codigo=$atributo->codigo_asignatura;
+      		}  
+			if($cod=$codigo)
+			{
+				redirect(base_url() .'index.php/administrador/malla_actual'); 
+			}
 
-
-			//para cuando quiero mostrar solo los ramos que tiene X profesor (X=rut del profesor logeado)
-			//$crud->where('RUT_PROFESOR','18.657.111-9');
-			
-			$crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
-			
-			$crud->display_as('codigo_asignatura','Asignatura');
-			$crud->display_as('rut_profesor','Profesor');
-			$crud->display_as('fecha_syllabus','Fecha de actualizacion');
-			$crud->set_field_upload('syllabus','assets/uploads/files');
-			
-			//relaciones con profes
-			$crud->set_relation('rut_profesor','usuarios','rut');
-
-			//relaciones con la asignatura
-			$crud->set_relation('codigo_asignatura','asignatura','nombre');
-
-			//restricciones
-			//$crud->unset_add();
-			//$crud->unset_edit();
-			$crud->unset_add_fields('syllabus','fecha_syllabus');
-			$output = $crud->render();
 
 			$this->salida_datos_plani($output);
 
 		}
+
+		public function malla_profesores(){//se necesita programar a mano el agregado de planificacion....
+			
+			$this->load->view('head');
+			$this->load->view('headers/header_administrador');
+			$this->load->view('administrador/malla_profesor');
+		
+		}
+
 		public function salida_datos_plani($output= null){
 			$this->load->view('head');
 			$this->load->view('headers/header_administrador');
@@ -293,7 +283,7 @@ $datos=array(
   'archivo' => $nombreFichero  
   );
   //insertar en la base de datos la noticia
-if (($this->mod_usuarios->insertar_noticias($datos))) {
+if (($this->Mod_usuarios->insertar_noticias($datos))) {
  $data['mensaje']=$result='<div class="alert alert-success"><h3>Noticia Ingresada Correctamente </h3></div>';
 
  
@@ -383,8 +373,8 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 		}
 		
 		public function termino_semestre(){
-  			$this->mod_usuarios->transferir_tabla();
-  			$this->mod_usuarios->borrar_planificacion();		
+  			$this->Mod_usuarios->transferir_tabla();
+  			$this->Mod_usuarios->borrar_planificacion();		
   			redirect(base_url() .'index.php/administrador'); 		
   			
 		}
@@ -398,33 +388,63 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 			}
 			
 			
-			$crud = new grocery_CRUD();
+			$crud = new grocery_CRUD();			
+			$crud->set_language('spanish');
+			$crud->set_subject('planificacion');			       		
+       		
+       	 //$crud->set_theme('datatables');
+       		$crud->set_table('planificacion');
+		    $crud->where('codigo_asignatura',$_COOKIE['cod_asig']);
+		    $crud->columns('codigo_asignatura','syllabus','fecha_syllabus','semestre');	 
+		    $crud->set_relation('codigo_asignatura','asignatura','nombre');
+		    $crud->display_as('codigo_asignatura','Nombre asignatura');
+		    $crud->display_as('fecha_syllabus','Año');
+		    
+		    //restricciones
+		    
+		    $crud->unset_add();
+		    $crud->unset_delete();
+		    $crud->unset_read();
+		    $crud->unset_edit();
 
-       
-        $crud->set_language('spanish');
-        $crud->set_subject('Planificacion');
-        //$crud->set_theme('datatables');
-        $crud->set_table('planificacion');
-        $crud->where('codigo_asignatura',$_COOKIE['cod_asig']);
-      
-      //condiciones
-        $crud->display_as('codigo_asignatura','Asignatura');
-        $crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
+		    $output = $crud->render();
+		    $this->salida_datos_editar_planificaciones($output); 
 
-      $crud->set_field_upload('syllabus','assets/uploads/files');
-        //relaciones con la asignatura
-      $crud->set_relation('codigo_asignatura','asignatura','nombre');
-      $crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2} ');
-      $crud->display_as('rut_profesor','Nombre Profesor');
-      //restricciones
-      $crud->unset_add();
-      $crud->unset_delete();
-      $crud->unset_read();
-      $crud->unset_edit();
+		}
 
-      $output = $crud->render();
+		public function editar_profe_asig(){
+			
 
-      $this->salida_datos_editar_planificaciones($output);
+			
+			if ($_GET['cod_asig']!=''){
+				$_COOKIE['cod_asig'] = $_GET['cod_asig'];
+				$_GET['cod_asig']='';				
+			}
+			
+			$crud = new grocery_CRUD();			
+			$crud->set_language('spanish');
+			$crud->set_subject('Profesor/es');			       		
+       		
+       	 //$crud->set_theme('datatables');
+       		$crud->set_table('profesor_planificacion');
+		    
+		    $crud->columns('codigo_asignatura','rut_profesor','fecha','semestre');	 
+		    $crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2}');
+		    $crud->set_relation('codigo_asignatura','asignatura','nombre');
+		    $crud->display_as('codigo_asignatura','Nombre asignatura');
+		    $crud->display_as('fecha','Año');
+		    
+		    //restricciones
+		    
+		    $crud->unset_add();
+		    $crud->unset_delete();
+		    $crud->unset_read();
+		    $crud->unset_edit();
+
+		    $output = $crud->render();
+		    $this->salida_datos_profes($output);
+
+		      
 
 
 		}
@@ -438,15 +458,63 @@ if (($this->mod_usuarios->insertar_noticias($datos))) {
 		}
 
 
+		public function salida_datos_profes($output= null){
+
+			$this->load->view('head_noticias');
+			$this->load->view('headers/header_administrador');
+			$this->load->view('administrador/editar_planificaciones.php',$output);
+		}
+
+
+
 
 		public function agregar_planificacion(){
-			$array=array('codigo_asignatura' => $_POST['ramo'],
-				'rut_profesor'=> $_POST['profesor'],
-				'fecha_syllabus'=>$_POST['fecha'],
+			
+			$año=date("Y");
+			$ramo=$_POST['ramo'];
+			$res=$this->Mod_usuarios->revisar_asignacion($ramo);
+			foreach ($res->result() as $atributo) {
+          		$veri=$atributo->codigo_asignatura;
+      		}  
+      		
+      		if($ramo==$veri)
+      		{
+      			echo "hola";
+      			redirect(base_url() .'index.php/administrador/malla_actual');
+      		}
+
+      		if($_POST['profesor']==$_POST['profesor_dos'])
+      		{
+      			print '<script language="JavaScript">'; 
+				print 'alert("Error! Profesor 1 y Profesor 2 no pueden ser iguales");'; 
+				print '</script>'; 
+				$url='refresh:1;url='.base_url() .'index.php/administrador/admin_planificacion?cod_asig='.$_POST['ramo'];
+				header($url);
+
+      		}
+			
+			$array=array('codigo_asignatura' => $_POST['ramo'],				
+				'fecha_syllabus'=>$año,
 				'semestre'=>$_POST['semestre']);
 
-			$this->mod_usuarios->agregar_planificacion($array);
+			
 
+			$array2=array('codigo_asignatura' => $_POST['ramo'],
+				'rut_profesor'=> $_POST['profesor'],
+				'fecha'=>$año,
+				'semestre'=>$_POST['semestre']);			
+
+			$this->Mod_usuarios->agregar_planificaciones($array);
+			$this->Mod_usuarios->agregar_profesor($array2);
+
+			if($_POST['profesor_dos']!='')
+			{
+				$array3=array('codigo_asignatura' => $_POST['ramo'],
+				'rut_profesor'=> $_POST['profesor_dos'],
+				'fecha'=>$año,
+				'semestre'=>$_POST['semestre']);
+				$this->Mod_usuarios->agregar_profesor($array3);
+			}
 			redirect(base_url() .'index.php/administrador/malla_actual'); 		
   			
   			

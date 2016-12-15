@@ -1,4 +1,6 @@
-<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+<!-- Sidebar
+ Menu Items - These collapse to the responsive navigation menu on small screens -->
+
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                      <li class="">
@@ -32,11 +34,11 @@
 
         <div id="page-wrapper">
 
-            <?php
+            <?php 
                    
-                     $consulta = $this->mod_usuarios->consulta_nom();
-                     $consulta2= $this->mod_usuarios->consulta_ape();
-                     $consulta3= $this->mod_usuarios->consulta_rut();
+                     $consulta = $this->Mod_usuarios->consulta_nom();
+                     $consulta2= $this->Mod_usuarios->consulta_ape();
+                     $consulta3= $this->Mod_usuarios->consulta_rut();
                      $aux = count($consulta);
                       ?>
                    
@@ -57,13 +59,14 @@
 
                         <div class="col-xs-12">
                              <label for="nombre" class="control-label col-xs-2">Año</label>
-                             <input type="Text" name="fecha" class="col-xs-2" required>
+                             <input type="Text" name="fecha" class="col-xs-2" value=<?php echo date("Y");?> readonly >
                         </div>
 
                         
                         <div class="col-xs-12">
                             <label for="nombre" class="control-label col-xs-2">Nombre profesor</label>
                             <select name = "profesor" class="col-xs-2">  
+                            <option><?php echo '';?></option>
                              <?php $i=0; 
 
                             for ($i=0; $i <$aux ; $i++) { ?>
@@ -74,8 +77,24 @@
                              </select>                    
                                                    
                         </div>
+                         <div class="col-xs-12">
+                            <label for="nombre" class="control-label col-xs-2">Nombre profesor 2</label>
+                            <select name = "profesor_dos" class="col-xs-2">  
+                            <option><?php echo '';?></option>
+                             <?php $i=0; 
 
-                          <button class="btn btn-primary col-xs-2 col-xs-offset-2"  type="submit" ><span class="glyphicon glyphicon-log-in"></span> Aceptar</button> 
+                            for ($i=0; $i <$aux ; $i++) { ?>
+                                <option  value="<?php echo $consulta3[$i]?>" > <?php echo $consulta[$i].' '.$consulta2[$i] ?> </option>
+                            <?php }
+
+                             ?>  
+                             </select>  
+                             <label for="nombre" class="control-label col-xs-2">(Opcional)</label>                  
+                                                   
+                        </div>
+                        <div id="campos">
+                        </div>                        
+                        <button class="btn btn-primary col-xs-2 col-xs-offset-2"  type="submit" ><span class="glyphicon glyphicon-log-in"></span> Aceptar</button> 
                     </form>
             <!-- /.container-fluid -->
 

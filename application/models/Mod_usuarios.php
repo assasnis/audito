@@ -297,9 +297,24 @@ public function planificacion_histo($cod_asig,$rut){
 
   }
 
-  public function agregar_planificacion($array){
-       $this->db->insert('planificacion',$array);
+ public function agregar_planificaciones($array){
+       $this->db->insert('planificacion',$array);      
+
     }
+
+     public function agregar_profesor($array){      
+      
+       $this->db->insert('profesor_planificacion',$array);
+
+    }
+
+  public function revisar_asignacion($codigo_curso){
+     
+      $this->db->select('*');      
+      $this->db->where('codigo_asignatura',$codigo_curso);
+      $query=$this->db->get('planificacion');
+      return $query;     
+  }
 
     
 }

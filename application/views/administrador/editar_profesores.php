@@ -1,43 +1,42 @@
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="">
+                     <li class="">
                         <a href="<?php echo base_url();?>index.php/administrador"><i class="fa fa-fw fa-file"></i> Noticias</a>
                     </li>
                     <li class ="" >
                         <a href="<?php echo base_url();?>index.php/administrador/admin_planificaciones_com"><i class="glyphicon glyphicon-th-list"></i> Planificaciones globales</a>
                     </li>
-                    <li class="" >
+                    <li class >
                         <a href="<?php echo base_url();?>index.php/administrador/admin_usuarios"><i class="glyphicon glyphicon-user"></i> Usuarios</a>
                     </li>
                     <li class >
                         <a href="<?php echo base_url();?>index.php/administrador/admin_asignatura"><i class="glyphicon glyphicon-paperclip"></i> Cursos</a>
                     </li>
-                    <li class >
-                        <a href="<?php echo base_url();?>index.php/administrador/admin_planificacion"><i class="glyphicon glyphicon-time"></i> Planificaciones</a>
+                    <li class="" >
+                        <a href="<?php echo base_url();?>index.php/administrador/malla_actual"><i class="glyphicon glyphicon-time"></i> Planificaciones</a>
                     </li>
-
                     <li class="" >
                         <a href="<?php echo base_url();?>index.php/administrador/malla_profesores"><i class="glyphicon glyphicon-time"></i> Profesores por Asignatura</a>
                     </li>
-
+                    <li class="active" >
+                        <a href="<?php echo base_url();?>index.php/administrador/malla_profesores"><i class="glyphicon glyphicon-time"></i> Profesores por Asignatura</a>
+                    </li>
                     <li class>
                         <a href='<?php echo base_url();?>index.php/administrador/malla'><i class="glyphicon glyphicon-time"></i>Planificaciones historicas</a>
                     </li>
                     <li class="">
                         <a href="<?php echo base_url();?>index.php/administrador/agregar_noticia"><i class="glyphicon glyphicon-plus"></i> Agregar Noticia</a>
                     </li>
-                    <li class="active">
+                    <li class="">
                         <a href="<?php echo base_url();?>index.php/administrador/plantillas_ad"><i class="glyphicon glyphicon-plus"></i>Administrar Plantillas</a>
-                    </li>
+                    </li>        
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
 
-        <div id="page-wrapper">
-
-            <div class="container-fluid">
+        <div class="container-fluid">
                     <?php 
                         foreach($css_files as $file): ?>
                             <link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
@@ -52,6 +51,9 @@
                 <!-- /.row -->
 
             </div>
+
+                         
+                    </div>
             <!-- /.container-fluid -->
 
         </div>
