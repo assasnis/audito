@@ -472,6 +472,11 @@
                 <div class="col-md-3">
                      <button class="btn btn-default" data-dismiss="modal">No</button>
                 </div>
+                <div class="col-md-12">
+                     <p>Importante! Si da click a SI, el semestre se dará por cerrado y se reiniciará. </p>
+                </div>
+                
+
              </div>
             </div>
             

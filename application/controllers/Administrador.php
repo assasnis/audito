@@ -28,32 +28,30 @@
 		public function admin_planificaciones_com(){
 
 			
+			$cod_asig = $_GET['cod_asig'];
 			$crud = new grocery_CRUD();
-			//$crud->set_theme('datatables');
-			$crud->set_table('planificacion');
-			$crud->set_language('spanish');
-			$crud->set_subject('Planificacion');
 
-		
-			$crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
-			
-			$crud->display_as('codigo_asignatura','Asignatura');
-			$crud->display_as('rut_profesor','Profesor');
-			$crud->display_as('fecha_syllabus','Fecha de actualizacion');
-			$crud->set_field_upload('syllabus','assets/uploads/files');
-			
-			//relaciones con profes
-			$crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2} ');
+       
+	        $crud->set_language('spanish');
+	        $crud->set_subject('planificacion');
+	        //$crud->set_theme('datatables');
+	        $crud->set_table('planificacion_historica');
+	        
+	      
+	      //condiciones
+	        $crud->display_as('codigo_asignatura','Asignatura');
+	        $crud->columns('codigo_asignatura','rut_profesor','fecha_syllabus','syllabus');
 
-			//relaciones con la asignatura
-			$crud->set_relation('codigo_asignatura','asignatura','nombre');
+	      $crud->set_field_upload('syllabus','assets/uploads/files');
+	        //relaciones con la asignatura
+	      $crud->set_relation('codigo_asignatura','asignatura','nombre');
 
-			//restricciones
-			$crud->unset_add();
-			//$crud->unset_edit();
+	      //restricciones
+	      $crud->unset_add();
+	      $crud->unset_delete();
+	      $crud->unset_edit();
 
-			$crud->unset_add_fields('syllabus','fecha_syllabus');
-			$output = $crud->render();
+	      $output = $crud->render();
 
 			$this->salida_datos_planificaciones_com($output);
 			
@@ -399,7 +397,8 @@ if (($this->Mod_usuarios->insertar_noticias($datos))) {
 		    $crud->set_relation('codigo_asignatura','asignatura','nombre');
 		    $crud->display_as('codigo_asignatura','Nombre asignatura');
 		    $crud->display_as('fecha_syllabus','Año');
-		    
+		    $crud->set_field_upload('syllabus','assets/uploads/files');
+       
 		    //restricciones
 		    
 		    $crud->unset_add();
@@ -427,6 +426,7 @@ if (($this->Mod_usuarios->insertar_noticias($datos))) {
        		
        	 //$crud->set_theme('datatables');
        		$crud->set_table('profesor_planificacion');
+       		$crud->where('codigo_asignatura',$_COOKIE['cod_asig']);
 		    
 		    $crud->columns('codigo_asignatura','rut_profesor','fecha','semestre');	 
 		    $crud->set_relation('rut_profesor','usuarios','{nombre_1} {apellido_1} {apellido_2}');
@@ -495,7 +495,8 @@ if (($this->Mod_usuarios->insertar_noticias($datos))) {
 			
 			$array=array('codigo_asignatura' => $_POST['ramo'],				
 				'fecha_syllabus'=>$año,
-				'semestre'=>$_POST['semestre']);
+				'semestre'=>$_POST['semestre'],
+				'codigo_asignatura2' => $_POST['ramo']);
 
 			
 

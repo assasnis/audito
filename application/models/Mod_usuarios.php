@@ -83,7 +83,7 @@ public function planificacion_histo($cod_asig,$rut){
 
       $query = $this->db->where('CODIGO_ASIGNATURA',$cod_asig);
       $query = $this->db->where('rut_profesor',$rut);
-      $query = $this->db->get('planificacion');
+      $query = $this->db->get('profesor_planificacion');
             if($this->db->affected_rows()>0){
                 return TRUE;
            }
@@ -224,7 +224,7 @@ public function planificacion_histo($cod_asig,$rut){
     }
   
   public function transferir_tabla(){
-        $query = $this->db->query('INSERT INTO planificacion_historica (codigo_asignatura,rut_profesor,syllabus,fecha_syllabus,semestre) SELECT planificacion.codigo_asignatura, planificacion.rut_profesor, planificacion.syllabus, planificacion.fecha_syllabus, planificacion.semestre FROM planificacion');
+        $query = $this->db->query('INSERT INTO planificacion_historica (codigo_asignatura,syllabus,fecha_syllabus,semestre) SELECT planificacion.codigo_asignatura, planificacion.syllabus, planificacion.fecha_syllabus, planificacion.semestre FROM planificacion');
     }
 
     public function borrar_planificacion(){
